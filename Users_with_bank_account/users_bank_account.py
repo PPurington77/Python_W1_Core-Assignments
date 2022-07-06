@@ -10,6 +10,9 @@ class BankAccount:
         self.balance += amount
         return self 
 
+    def see_balance(self):
+        print(f"Your balance is {self.balance}")
+
     def withdraw(self, amount):
         if (self.balance - amount) < 0:
             print("Sorry you don't have the funds necessary to make this withdrawel")
@@ -41,7 +44,17 @@ class User:
         self.email = email
         self.account = BankAccount(balance = 0, int_rate = .02)
 
+    def deposit_money(self, amount):
+        self.account.deposit(amount)
+        return self
+
+    def withdraw_money(self, amount):
+        self.account.withdraw(amount)
+        return self 
+
+    def display_user_balance(self):
+        self.account.see_balance()
 
 user_a = User("Patrick", "papurington@gmail.com")
-user_a.account.deposit(500)
-print(user_a.account.balance)
+user_a.deposit_money(1500).withdraw_money(500)
+user_a.display_user_balance()
